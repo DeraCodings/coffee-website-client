@@ -116,3 +116,20 @@ export const productsQuery = `query Products($pagination: PaginationArg) {
     description
   }
 }`;
+
+export const entireProductQuery = `query Products {
+  products {
+    name
+    price
+    images {
+      alternativeText
+      url
+    }
+    description
+    category {
+      documentId
+      name
+      description
+    }
+  }
+}`

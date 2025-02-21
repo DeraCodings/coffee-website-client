@@ -27,7 +27,6 @@ export type Product = {
   description: string | null;
 };
 
-
 export interface Category {
   name: string;
   description: string;
@@ -50,4 +49,29 @@ export interface TestimonialCardProps {
   name: string;
   quote: string;
   alternativeText: string;
+}
+
+export interface ProductShape {
+  name: string;
+  price: number;
+  images: {
+    alternativeText: string;
+    url: string;
+  }[];
+  description: string | null;
+  category: {
+    documentId: string;
+    name: string;
+    description: string;
+  };
+}
+
+export interface ProductsResponse {
+  data: {
+    products: ProductShape[];
+  };
+}
+
+export interface CartItem extends ProductShape {
+  quantity: number;
 }
