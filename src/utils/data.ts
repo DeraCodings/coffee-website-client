@@ -131,5 +131,6 @@ export const entireProductQuery = `query Products {
       name
       description
     }
+    documentId
   }
 }`

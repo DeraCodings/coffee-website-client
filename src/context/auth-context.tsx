@@ -35,8 +35,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
         );
         setProfileImage(profileImageUrl);
       } catch (error) {
-        console.error(error);
-        setUser(null);
+        console.error("User not authenticated. Creating an anonymous user...", error);
+        try {
+          await account.createAnonymousSession();
+          const anonymousUser = await account.get();
+          setUser(anonymousUser);
+        } catch (anonError) {
+          console.log(anonError);
+          setUser(null);
+        }
       }
     }
 

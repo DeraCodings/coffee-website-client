@@ -4,9 +4,21 @@ import Image from "next/image";
 import { useCart } from "@/context/cart-context";
 import { ProductShape } from "@/utils/types";
 import { baseURL } from "@/functions/fetchHomePage";
+import { toast } from "react-toastify";
 
 export default function ProductCard({ product }: { product: ProductShape }) {
   const { addToCart } = useCart();
+
+  // console.log(cartItems, cartItemsCount);
+  const handleAddToCart = async () => {
+    try {
+      await addToCart(product);
+      toast.success("Added item to cart");
+    } catch (error) {
+      console.log(error);
+      toast.error("Couldn't add item to cart")
+    }
+  }
 
   return (
     <div className="group w-4/5 shadow-sm shadow-[#f7d9b6]">
@@ -17,6 +29,7 @@ export default function ProductCard({ product }: { product: ProductShape }) {
           width={500}
           height={500}
           className="h-full w-full object-cover"
+          priority
         />
       </div>
 
@@ -32,7 +45,7 @@ export default function ProductCard({ product }: { product: ProductShape }) {
             ${product.price.toFixed(2)}
           </span>
           <button
-            onClick={() => addToCart(product)}
+            onClick={handleAddToCart}
             className="rounded-sm bg-[#bf935f] px-4 py-1 text-base font-semibold text-[#443227] transition-colors duration-300 hover:bg-[#443227] hover:text-white"
           >
             Add to Cart

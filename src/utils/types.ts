@@ -64,6 +64,7 @@ export interface ProductShape {
     name: string;
     description: string;
   };
+  documentId: string;
 }
 
 export interface ProductsResponse {

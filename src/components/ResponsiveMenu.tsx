@@ -4,9 +4,9 @@ import { useState } from "react";
 import { useAuth } from "@/context/auth-context";
 import { useCart } from "@/context/cart-context";
 import { useFetchHomePageData } from "@/hooks/useFetchHomePageData";
-import { ShoppingBag, Menu, X } from "lucide-react";
-import Image from "next/image";
+import { ShoppingBag, Menu, X } from "lucide-react"
 import Link from "next/link";
+import { UserAvatar } from "./UserAvatar";
 
 type NavLink = {
   href: string;
@@ -18,7 +18,7 @@ type NavLinks = {
 };
 
 function Header() {
-  const { user, profileImage } = useAuth();
+  const { user } = useAuth();
   const { cartItemsCount } = useCart();
   const { navigation } = useFetchHomePageData();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,19 +60,8 @@ function Header() {
             ) : null}
           </Link>
 
-          {user ? (
-            <Image
-              alt={user.name}
-              src={profileImage}
-              height={50}
-              width={50}
-              className="rounded-full"
-            />
-          ) : (
-            <Link href="/login" className="hover:text-[#bf925f]">
-              Login
-            </Link>
-          )}
+          <UserAvatar />
+          
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="p-2 hover:text-[#bf925f] md:hidden"
