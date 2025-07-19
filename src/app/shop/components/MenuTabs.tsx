@@ -1,5 +1,7 @@
 "use client";
 
+import { fraunces } from "@/utils/font-config";
+
 interface MenuTabsProps {
   activeCategory: string;
   onCategoryChange: (category: string) => void;
@@ -22,7 +24,7 @@ export default function MenuTabs({
               activeCategory === category
                 ? "-mb-[2px] border-b-2 border-[#bf935f] text-[#bf935f]"
                 : "text-[#443227] hover:text-[#bf935f]"
-            } `}
+            } ${fraunces.className}`}
           >
             {category}
           </button>

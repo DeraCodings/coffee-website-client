@@ -2,11 +2,14 @@ import { BlockRendererClient } from "../BlocksRendererClient";
 import Image from "next/image";
 import { baseURL, fetchData } from "@/functions/fetchHomePage";
 import { query } from "@/utils/data";
+import { playfairDisplay } from "@/utils/font-config";
 
 async function OurStory() {
   const homePageData = await fetchData(query);
 
   const ourStoryComponentData = homePageData?.homePage?.layout[1];
+
+  console.log("Our Story Component Data:", ourStoryComponentData);
 
   const heading = ourStoryComponentData?.heading;
   const story = ourStoryComponentData?.story;
@@ -22,7 +25,9 @@ async function OurStory() {
   return (
     <section className="flex h-full flex-col items-center justify-center gap-8 md:h-screen md:flex-row md:items-start md:justify-around md:gap-1">
       <div className="">
-        <h2 className="text-center text-3xl font-light text-[#bf935f] md:text-left">
+        <h2
+          className={`text-center text-3xl font-semibold text-[#443227] md:text-left ${playfairDisplay.className}`}
+        >
           {heading?.text}
         </h2>
         <BlockRendererClient content={story} />

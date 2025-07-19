@@ -1,11 +1,9 @@
-import { Playfair_Display } from "next/font/google";
 import type { ProductsResponse, ProductShape } from "@/utils/types";
 import MenuContainer from "./components/MenuContainer";
 import { baseURL } from "@/functions/fetchHomePage";
 import { entireProductQuery } from "@/utils/data";
 import Toaster from "./components/Toaster";
-
-const playfair = Playfair_Display({ subsets: ["latin"] });
+import { playfairDisplay } from "@/utils/font-config";
 
 // This is a special Next.js function that runs on the server
 async function getProducts(): Promise<ProductShape[]> {
@@ -34,11 +32,11 @@ export default async function MenuPage() {
 
   return (
     <main className="container mx-auto px-4 py-12">
-      <h1
-        className={`${playfair.className} mb-12 text-center text-4xl text-[#443227] md:text-5xl`}
+      <h2
+        className={`${playfairDisplay.className} mb-12 text-center text-4xl font-bold text-[#443227] md:text-5xl`}
       >
         Our Menu
-      </h1>
+      </h2>
       <Toaster />
       <MenuContainer initialProducts={products} />
     </main>

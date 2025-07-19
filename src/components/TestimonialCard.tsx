@@ -1,3 +1,4 @@
+import { fraunces, lato } from "@/utils/font-config";
 import { TestimonialCardProps } from "@/utils/types";
 import Image from "next/image";
 
@@ -21,8 +22,8 @@ function TestimonialCard({
           />
         </div>
       </div>
-      <h4 className="text-center text-xl font-semibold text-[#bf925f]">{name}</h4>
-      <p className="text-wrap text-[#443227]">{quote}</p>
+      <h4 className={`text-center text-xl font-semibold text-[#bf925f] ${fraunces.className}`}>{name}</h4>
+      <p className={`text-wrap text-[#443227] ${lato.className}`}>{quote}</p>
     </div>
   );
 }

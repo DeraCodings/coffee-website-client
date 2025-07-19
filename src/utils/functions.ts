@@ -1,6 +1,7 @@
 import { databases } from "./appwrite";
 import { CartItem } from "./types";
 import { ID, Models } from "appwrite";
+import {customAlphabet} from "nanoid";
 
 const CART_LOCAL_STORAGE_KEY = "cartItems";
 
@@ -49,9 +50,17 @@ async function mergeLocalCartWithDatabase(authenticatedUserId: Models.User<Model
   clearLocalCart();
 }
 
+// Creating a transaction reference generator function
+function generateTransactionReference() {
+  const alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  const nanoId = customAlphabet(alphabet, 16);
+  return `tax-${nanoId()}`;
+}
+
 export {
   setLocalCart,
   getLocalCart,
   clearLocalCart,
   mergeLocalCartWithDatabase,
+  generateTransactionReference,
 };

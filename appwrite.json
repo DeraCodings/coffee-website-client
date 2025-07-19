@@ -1,0 +1,25 @@
+{
+    "projectId": "67a3922b0017b23101ef",
+    "functions": [
+        {
+            "$id": "67fea972003101a6fdc7",
+            "name": "payment-handler",
+            "runtime": "node-18.0",
+            "specification": "s-0.5vcpu-512mb",
+            "execute": [
+                "users"
+            ],
+            "events": [],
+            "scopes": [
+                "users.read"
+            ],
+            "schedule": "",
+            "timeout": 15,
+            "enabled": true,
+            "logging": true,
+            "entrypoint": "src/main.js",
+            "commands": "npm install",
+            "path": "functions/payment-handler"
+        }
+    ]
+}

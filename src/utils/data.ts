@@ -114,6 +114,7 @@ export const productsQuery = `query Products($pagination: PaginationArg) {
       url
     }
     description
+    documentId
   }
 }`;
 
@@ -134,3 +135,68 @@ export const entireProductQuery = `query Products {
     documentId
   }
 }`
+
+export const aboutPageQuery = `query AboutPage {
+  aboutPage {
+    AboutUs {
+      ... on ComponentComponentsHeading {
+        headingText: text
+      }
+      ... on ComponentComponentsDescription {
+        description: text
+      }
+      ... on ComponentComponentsImage {
+        image {
+          alternativeText
+          url
+        }
+      }
+      ... on ComponentComponentsCard {
+        card_title
+        card_image {
+          alternativeText
+          url
+        }
+        card_description
+      }
+    }
+    company_address
+    gentle_nudge
+    open_hours
+  }
+}`
+
+export const allProductsQuery = `query AboutPage {
+  products {
+    documentId
+    name
+    price
+    description
+    quantity
+    category {
+      name
+      documentId
+      description
+    }
+    images {
+      alternativeText
+      url
+    }
+  }
+}`;
+
+export const productByNameQuery = `query Products($filters: ProductFiltersInput) {
+  products(filters: $filters) {
+    documentId
+    category {
+      name
+    }
+    name
+    price
+    quantity
+    images {
+      alternativeText
+      url
+    }
+  }
+}`;

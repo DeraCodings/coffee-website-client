@@ -1,5 +1,6 @@
 import { baseURL, fetchData } from "@/functions/fetchHomePage";
 import { query } from "@/utils/data";
+import { playfairDisplay } from "@/utils/font-config";
 import { CTAData } from "@/utils/types";
 
 
@@ -14,7 +15,7 @@ async function CallToActionSection() {
       style={{ backgroundImage: `url(${imageUrl})` }}
       className="flex h-screen items-center justify-center bg-cover bg-center bg-no-repeat"
     >
-      <h2 className="text-5xl text-center font-extrabold text-white">
+      <h2 className={`text-5xl text-center font-extrabold text-white ${playfairDisplay.className}`}>
         {callToActionSectionData?.text?.text}
       </h2>
     </div>

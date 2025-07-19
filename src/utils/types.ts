@@ -1,3 +1,5 @@
+import { Models } from "appwrite";
+
 export type Links = {
   href: string;
   text: string;
@@ -75,4 +77,64 @@ export interface ProductsResponse {
 
 export interface CartItem extends ProductShape {
   quantity: number;
+}
+
+export interface ReusableInputProps {
+  label: string;
+  placeholder: string;
+  error?: string;
+  inputType: string;
+  id: string;
+  name?: string;
+}
+
+export interface FunctionCallResponse extends Models.Execution {
+  message?: string;
+  error?: string;
+  success?: boolean;
+  orderId?: string;
+}
+
+/** Represents an image asset with alt text and URL */
+export interface AbouPageImage {
+  alternativeText: string;
+  url: string;
+}
+
+/** Union of all possible AboutUs item shapes */
+
+// type CardItem = {
+//   card_title: string;
+//   card_image: AbouPageImage | null;
+//   card_description: string;
+//   iconName?: "Weekly Cuppings" | "Brewing Workshop" | "Sustainability Initiatives";
+// }
+export interface AboutUsItem {
+  headingText?: string;
+  description?: string | null;
+  image?: AbouPageImage;
+  card_title: string;
+  card_image: AbouPageImage | null;
+  card_description: string;
+  iconName?: "Weekly Cuppings" | "Brewing Workshop" | "Sustainability Initiatives";
+}
+
+/** Business hours for the café */
+export interface OpenHours {
+  "Monday-Friday": string;
+  Saturday: string;
+  Sunday: string;
+}
+
+/** Main payload for the About Page */
+export interface AboutPage {
+  AboutUs: AboutUsItem[];
+  company_address: string;
+  gentle_nudge: string;
+  open_hours: OpenHours;
+}
+
+/** Wrapper for the data field */
+export interface ApiResponse {
+  aboutPage: AboutPage;
 }

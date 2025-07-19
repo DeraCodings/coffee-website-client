@@ -1,5 +1,6 @@
-import { fetchData } from "@/functions/fetchHomePage";
+import { baseURL, fetchData } from "@/functions/fetchHomePage";
 import { query } from "@/utils/data";
+import { fraunces, lato } from "@/utils/font-config";
 import { PageLinks } from "@/utils/types";
 import Link from "next/link";
 import { FaFacebook } from "react-icons/fa";
@@ -14,42 +15,43 @@ async function Footer() {
   const shopLinks = footerData?.pageLinks.slice(3, 5);
   const aboutUsLinks = footerData?.pageLinks.slice(5);
 
-  console.log(footerData, privacyLinks, shopLinks, aboutUsLinks);
+  console.log("Base URL:", baseURL);
+  console.log(footerData, {privacyLinks}, {shopLinks}, {aboutUsLinks}, {storyPageData: homePageData?.homePage?.layout[0]});
   return (
     <footer className="py-16 px-8 text-white bg-[#171310]">
       <div className="flex flex-col gap-5 md:flex-row justify-center md:gap-8">
         <div>
-          <h3 className="text-xl font-semibold text-center md:text-left text-[#bf935f]">Privacy</h3>
+          <h3 className={`text-xl font-semibold text-center md:text-left text-[#bf935f] ${fraunces.className}`}>Privacy</h3>
           <ul className="text-center my-4 md:my-2 md:text-left">
             {privacyLinks.map((link, index: number) => (
               <li key={index}>
-                <Link href={link?.href} className="hover:text-[#bf925f] hover:underline transition-all duration-200">{link?.text}</Link>
+                <Link href={link?.href} className={`hover:text-[#bf925f] hover:underline transition-all duration-200 ${lato.className}`}>{link?.text}</Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-center md:text-left text-[#bf935f]">Shop</h3>
+          <h3 className={`text-xl font-semibold text-center md:text-left text-[#bf935f] ${fraunces.className}`}>Shop</h3>
           <ul className="text-center my-4 md:my-2 md:text-left">
             {shopLinks.map((link, index: number) => (
               <li key={index}>
-                <Link href={link?.href} className="hover:text-[#bf925f] hover:underline transition-all duration-200">{link?.text}</Link>
+                <Link href={link?.href} className={`hover:text-[#bf925f] hover:underline transition-all duration-200 ${lato.className}`}>{link?.text}</Link>
               </li>
             ))}
           </ul>
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-center md:text-left text-[#bf935f]">About us</h3>
-          <ul className="text-center my-4 md:my-2 md:text-left">
+          <h3 className={`text-xl font-semibold text-center md:text-left text-[#bf935f] ${fraunces.className}`}>About us</h3>
+          <ul className={`text-center my-4 md:my-2 md:text-left ${lato.className}`}>
             {aboutUsLinks.map((link, index: number) => (
               <li key={index}>
-                <Link href={link?.href} className="hover:text-[#bf925f] hover:underline transition-all duration-200">{link?.text}</Link>
+                <Link href={link?.href} className={`hover:text-[#bf925f] hover:underline transition-all duration-200 ${lato.className}`}>{link?.text}</Link>
               </li>
             ))}
           </ul>
         </div>
       </div>
-      <div className="text-xl text-center font-semibold my-4 text-[#bf935f]">Social media</div>
+      <div className={`text-xl text-center font-semibold my-4 text-[#bf935f] ${fraunces.className}`}>Social media</div>
       <div className="flex flex-row justify-center gap-7">
         <Link href="#" className="hover:text-[#bf925f] hover:underline transition-all duration-200"><FaSquareXTwitter size={30} /></Link>
         <Link href="#" className="hover:text-[#bf925f] hover:underline transition-all duration-200"><FaFacebook size={30} /></Link>
