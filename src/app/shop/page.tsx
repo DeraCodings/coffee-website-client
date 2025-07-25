@@ -1,3 +1,6 @@
+import { Metadata } from "next";
+import { ogImageUrl, websiteUrl } from "@/utils/configurations";
+
 import type { ProductShape, GraphQLResponse } from "@/utils/types";
 import MenuContainer from "./components/MenuContainer";
 import { baseURL } from "@/functions/fetchHomePage";
@@ -5,26 +8,31 @@ import { allProductsByCategoryQuery } from "@/utils/data";
 import Toaster from "./components/Toaster";
 import { playfairDisplay } from "@/utils/font-config";
 
-// This is a special Next.js function that runs on the server
-// async function getProducts(): Promise<ProductShape[]> {
-//   try {
-//     const result = await fetch(`${baseURL}/graphql`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ query: entireProductQuery }),
-//     });
+export const metadata: Metadata = {
+  title: "Our Coffee Menu | Terra & Brews",
+  description: "Explore our premium selection of artisan coffee beans and expertly crafted coffee drinks. Single origin, blends, and seasonal specials.",
+  openGraph: {
+    title: "Our Coffee Menu | Terra & Brews",
+    description: "Explore our premium selection of artisan coffee beans and expertly crafted coffee drinks.",
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "Beans & Brews Coffee Menu",
+      },
+    ],
+  },
+  twitter: {
+    title: "Our Coffee Menu | Terra & Brews",
+    description: "Explore our premium selection of artisan coffee beans and expertly crafted coffee drinks.",
+    images: [ogImageUrl],
+  },
+  alternates: {
+    canonical: websiteUrl,
+  },
+};
 
-//     if (!result.ok) throw new Error("An error occurred while fetching data");
-
-//     const data: ProductsResponse = await result.json();
-//     return data?.data?.products || [];
-//   } catch (error) {
-//     console.error("Failed to fetch products:", error);
-//     return []; // Return an empty array if there's an error
-//   }
-// }
 
 async function getProducts(): Promise<ProductShape[]> {
   const controller = new AbortController();

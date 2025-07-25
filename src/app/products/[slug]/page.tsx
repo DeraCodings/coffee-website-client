@@ -8,6 +8,42 @@ import { getProductByName } from "@/functions/fetchHomePage";
 import CartProductCard from "@/components/CartProductCard";
 import { ProductShape } from "@/utils/types";
 import { fromSlug } from "@/utils/slug";
+// import { Metadata } from "next";
+
+// interface PageProps {
+//   params: {
+//     slug: string;
+//   };
+// }
+
+// app/items/[slug]/page.tsx
+// export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+//   try {
+//     const restoredProductName = fromSlug(params.slug);
+//     const product = await getProductByName(restoredProductName);
+    
+//     if (!product) {
+//       return {
+//         title: "Product Not Found | Terra & Brews",
+//         description: "Could not find the requested product",
+//       };
+//     }
+
+//     return {
+//       title: `${product.name} | Terra & Brews`,
+//       description: product.description,
+//       openGraph: {
+//         images: [product.images[0]?.url || '/default-coffee.jpg'],
+//       },
+//     };
+//   } catch (error) {
+//     console.log("Error occurred: ", error);
+//     return {
+//       title: "Error | Terra & Brews",
+//       description: "An error occurred while loading product information",
+//     };
+//   }
+// }
 
 export default async function ProductDetailPage({
   params,
