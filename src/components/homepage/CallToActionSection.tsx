@@ -1,4 +1,4 @@
-import { baseURL, fetchData } from "@/functions/fetchHomePage";
+import { fetchData } from "@/functions/fetchHomePage";
 import { query } from "@/utils/data";
 import { playfairDisplay } from "@/utils/font-config";
 import { CTAData } from "@/utils/types";
@@ -8,7 +8,7 @@ async function CallToActionSection() {
   const homePageData = await fetchData(query);
   const callToActionSectionData: CTAData =
     homePageData?.homePage?.layout[4];
-  const imageUrl = `${baseURL}${callToActionSectionData?.backgroundImage?.image?.url}`;
+  const imageUrl = `${callToActionSectionData?.backgroundImage?.image?.url}`;
   console.log(callToActionSectionData);
   return (
     <div

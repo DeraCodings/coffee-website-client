@@ -1,4 +1,4 @@
-import { baseURL, fetchData, fetchProducts } from "@/functions/fetchHomePage";
+import { fetchData, fetchProducts } from "@/functions/fetchHomePage";
 import { query } from "@/utils/data";
 import { ProductShape } from "@/utils/types";
 import FeaturedProductCard from "../FeaturedProductCard";
@@ -29,7 +29,7 @@ async function FeaturedSection() {
             alternativeText: "",
           };
           product?.images.forEach(imageObj => (image = imageObj));
-          const imageUrl = `${baseURL}${image?.url}`;
+          const imageUrl = `${image?.url}`;
           return (
             <FeaturedProductCard
               altText={image?.alternativeText}

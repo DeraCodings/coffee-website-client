@@ -41,6 +41,7 @@ export default function MenuContainer({ initialProducts }: { initialProducts: Pr
         activeCategory={activeCategory} 
         onCategoryChange={handleCategoryChange}
         categories={[...new Set(initialProducts.map(p => p.category.name))]}
+        // categories={['Coffee brews', 'Coffee beans',]}
       />
       
       <ProductGrid products={paginatedProducts} />

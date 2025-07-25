@@ -32,7 +32,7 @@ export type Product = {
 export interface Category {
   name: string;
   description: string;
-  products: Product[];
+  products: ProductShape[];
 }
 
 export interface CTAData {
@@ -74,6 +74,48 @@ export interface ProductsResponse {
     products: ProductShape[];
   };
 }
+export interface CategoryResponse {
+  data: {
+    categories: {
+      name: string;
+      products: ProductShape[];
+    }
+  };
+}
+
+
+// types.ts
+export interface ProductImage {
+  alternativeText: string;
+  url: string;
+}
+
+export interface ProductCategory {
+  documentId: string;
+  name: string;
+  description: string;
+}
+
+// export interface Product {
+//   documentId: string;
+//   name: string;
+//   price: number;
+//   description: string | null;
+//   images: ProductImage[];
+//   category: ProductCategory;
+// }
+
+export interface Category {
+  name: string;
+  products: ProductShape[];
+}
+
+export interface GraphQLResponse {
+  data: {
+    categories: Category[];
+  };
+}
+
 
 export interface CartItem extends ProductShape {
   quantity: number;

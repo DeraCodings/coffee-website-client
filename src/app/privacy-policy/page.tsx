@@ -227,7 +227,7 @@ export default function PrivacyPolicyPage() {
                         href="mailto:privacy@brewandbean.co"
                         className={`ml-2 text-[#bf935f] hover:underline ${lato.className}`}
                       >
-                        privacy@brewandbean.co
+                        privacy@terraandbrews.co
                       </a>
                     </div>
                     <p className={`mt-2 ${lato.className}`}>

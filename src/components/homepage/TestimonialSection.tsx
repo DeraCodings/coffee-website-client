@@ -1,4 +1,4 @@
-import { baseURL, fetchData } from "@/functions/fetchHomePage";
+import { fetchData } from "@/functions/fetchHomePage";
 import TestimonialCard from "../TestimonialCard";
 import { query } from "@/utils/data";
 import { Testimonials } from "@/utils/types";
@@ -17,7 +17,7 @@ async function TestimonialSection() {
       <h2 className={`text-3xl text-[#443227] font-bold text-center py-4 ${playfairDisplay.className}`}>{heading?.text}</h2>
       <section className="flex flex-col flex-wrap justify-around items-center gap-8 md:flex-nowrap md:flex-row">
         {testimonials.map((testimonial, index: number) => {
-          const imageUrl = `${baseURL}${testimonial.image?.image?.url}`;
+          const imageUrl = `${testimonial.image?.image?.url}`;
           return (
             <TestimonialCard
               key={index}

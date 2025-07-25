@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCart } from "@/context/cart-context";
 import { X } from "lucide-react";
-import { baseURL } from "@/functions/fetchHomePage";
 
 export default function CheckoutOrderSummary() {
   const { cartItems, removeFromCart } = useCart();
@@ -26,7 +25,7 @@ export default function CheckoutOrderSummary() {
           <div key={item.documentId} className="flex items-center gap-4">
             <div className="h-16 w-16 overflow-hidden rounded-lg bg-gray-100">
               <Image
-                src={`${baseURL}${item.images[0]?.url}` || "/placeholder.svg"}
+                src={`${item.images[0]?.url}` || "/placeholder.svg"}
                 alt={item.name}
                 // fill
                 width={100}
@@ -40,7 +39,7 @@ export default function CheckoutOrderSummary() {
             </div>
             <div className="text-right">
               <p className="font-medium text-[#443227]">
-                ${(item.price * item.quantity).toFixed(2)}
+                ₦{(item.price * item.quantity).toFixed(2)}
               </p>
               <button
                 onClick={() => removeFromCart(item.documentId)}
@@ -55,7 +54,7 @@ export default function CheckoutOrderSummary() {
         <div className="space-y-2 border-t pt-4">
           <div className="flex justify-between text-[#443227]">
             <span>Subtotal</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>₦{subtotal.toFixed(2)}</span>
           </div>
           <div className="flex justify-between text-[#443227]">
             <span>Shipping</span>
@@ -63,7 +62,7 @@ export default function CheckoutOrderSummary() {
           </div>
           <div className="flex justify-between border-t pt-2 text-lg font-semibold text-[#443227]">
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>₦{total.toFixed(2)}</span>
           </div>
         </div>
       </div>

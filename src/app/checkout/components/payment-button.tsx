@@ -36,7 +36,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({ disabled, onClick }) => {
       disabled={disabled || total < 0}
       type="submit"
     >
-      Complete Order - ${total.toFixed(2)}
+      Complete Order - ₦{total.toFixed(2)}
     </button>
   );
 };

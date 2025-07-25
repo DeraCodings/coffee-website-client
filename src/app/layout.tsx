@@ -33,6 +33,7 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
+          {/* Main content of the page */}
           {children}
           <Footer />
         </Providers>

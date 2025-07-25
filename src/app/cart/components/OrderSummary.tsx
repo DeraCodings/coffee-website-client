@@ -24,7 +24,7 @@ export default function OrderSummary() {
       <div className="space-y-4">
         <div className={`flex justify-between text-[#443227] ${lato.className}`}>
           <span>Subtotal</span>
-          <span>${subtotal.toFixed(2)}</span>
+          <span>₦{subtotal.toFixed(2)}</span>
         </div>
 
         <div className={`flex justify-between text-[#443227] ${lato.className}`}>
@@ -35,7 +35,7 @@ export default function OrderSummary() {
         <div className="border-t pt-4">
           <div className={`flex justify-between text-lg font-medium text-[#443227] ${lato.className}`}>
             <span>Total</span>
-            <span>${total.toFixed(2)}</span>
+            <span>₦{total.toFixed(2)}</span>
           </div>
         </div>
 

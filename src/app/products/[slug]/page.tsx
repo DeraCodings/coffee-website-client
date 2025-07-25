@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { baseURL, getRelatedProducts } from "@/functions/fetchHomePage";
+import { getRelatedProducts } from "@/functions/fetchHomePage";
 import { getProductByName } from "@/functions/fetchHomePage";
 import CartProductCard from "@/components/CartProductCard";
 import { ProductShape } from "@/utils/types";
@@ -145,7 +145,7 @@ export default async function ProductDetailPage({
                 <div className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md">
                   <div className="relative aspect-square overflow-hidden">
                     <Image
-                      src={`${baseURL}${product?.images[0]?.url}`}
+                      src={`${product?.images[0]?.url}`}
                       alt={`${product.images[0]?.alternativeText}`}
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-105"

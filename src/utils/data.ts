@@ -200,3 +200,24 @@ export const productByNameQuery = `query Products($filters: ProductFiltersInput)
     }
   }
 }`;
+
+export const allProductsByCategoryQuery = `query Categories {
+  categories {
+    name
+    products {
+      documentId
+      description
+      images {
+        alternativeText
+        url
+      }
+      name
+      price
+      category {
+        description
+        documentId
+        name
+      }
+    }
+  }
+}`;

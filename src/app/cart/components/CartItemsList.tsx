@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useCart } from "@/context/cart-context";
 import RemoveFromCartButton from "./RemoveCartButton";
 import UpdateQuantityButton from "./UpdateQuantityButton";
-import { baseURL } from "@/functions/fetchHomePage";
 import { fraunces, lato } from "@/utils/font-config";
 
 export default function CartItemList() {
@@ -49,7 +48,7 @@ export default function CartItemList() {
                   <Image
                     src={
                       item.images?.[0]?.url
-                        ? `${baseURL}${item.images[0].url}`
+                        ? `${item.images[0].url}`
                         : "/placeholder.svg"
                     }
                     alt={item.name}
@@ -65,7 +64,7 @@ export default function CartItemList() {
                 </div>
               </div>
 
-              <div className="text-[#443227]">${item.price.toFixed(2)}</div>
+              <div className="text-[#443227]">₦{item.price.toFixed(2)}</div>
 
               <div className="flex items-center gap-2">
                 <UpdateQuantityButton item={item} increment={false} />
@@ -76,7 +75,7 @@ export default function CartItemList() {
               </div>
 
               <div className="font-medium text-[#443227]">
-                ${(item.price * item.quantity).toFixed(2)}
+                ₦{(item.price * item.quantity).toFixed(2)}
               </div>
 
               <RemoveFromCartButton item={item} />

@@ -2,7 +2,9 @@ import { productsQuery } from "@/utils/data";
 import { ProductShape } from "@/utils/types";
 
 
-export const baseURL = process.env.NEXT_PUBLIC_URL || "http://localhost:1337";
+export const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:1337";
+
+console.log(baseURL, "Base URL for GraphQL API"); // Debugging line to check baseURL
 
 export async function fetchData(query: string) {
   const data = JSON.stringify({ query });

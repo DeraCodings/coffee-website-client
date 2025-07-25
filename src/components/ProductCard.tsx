@@ -1,5 +1,4 @@
 import { BaseProductShape } from "@/app/products/page";
-import { baseURL } from "@/functions/fetchHomePage";
 import Image from "next/image";
 import React from "react";
 
@@ -8,7 +7,7 @@ function ProductCard({product}: {product: BaseProductShape}) {
     <div className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md">
       <div className="relative aspect-square overflow-hidden">
         <Image
-          src={`${baseURL}${product.images[0]?.url}`}
+          src={`${product.images[0]?.url}`}
           alt={product.images[0]?.alternativeText || product.name}
           fill
           className="object-cover transition-transform duration-300 group-hover:scale-105"

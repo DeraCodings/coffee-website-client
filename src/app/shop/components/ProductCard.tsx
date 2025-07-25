@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useCart } from "@/context/cart-context";
 import { ProductShape } from "@/utils/types";
-import { baseURL } from "@/functions/fetchHomePage";
 import { toast } from "react-toastify";
 import { fraunces, lato } from "@/utils/font-config";
 
@@ -25,7 +24,7 @@ export default function ProductCard({ product }: { product: ProductShape }) {
     <div className="group w-4/5 shadow-sm shadow-[#f7d9b6]">
       <div className="mb-4 aspect-square w-full overflow-hidden rounded-md bg-white">
         <Image
-          src={`${baseURL}${product.images[0].url}` || "/placeholder.svg"}
+          src={`${product.images[0].url}` || "/placeholder.svg"}
           alt={product.images[0].alternativeText}
           width={500}
           height={500}
@@ -43,7 +42,7 @@ export default function ProductCard({ product }: { product: ProductShape }) {
         </p>
         <div className="flex flex-col items-center gap-3">
           <span className={`${lato.className} font-medium text-[#bf935f]`}>
-            ${product.price.toFixed(2)}
+            ₦{product.price.toFixed(2)}
           </span>
           <button
             onClick={handleAddToCart}

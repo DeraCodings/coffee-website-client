@@ -1,6 +1,6 @@
 import { BlockRendererClient } from "../BlocksRendererClient";
 import Image from "next/image";
-import { baseURL, fetchData } from "@/functions/fetchHomePage";
+import { fetchData } from "@/functions/fetchHomePage";
 import { query } from "@/utils/data";
 import { playfairDisplay } from "@/utils/font-config";
 
@@ -18,9 +18,9 @@ async function OurStory() {
   const firstImage = images[0];
   const secondImage = images[1];
 
-  const imageUrl = `${baseURL}${firstImage?.image?.url}`;
+  // const imageUrl = `${baseURL}${firstImage?.image?.url}`;
 
-  console.log(heading, story, firstImage, secondImage, imageUrl);
+  console.log(heading, story, firstImage, secondImage);
 
   return (
     <section className="flex h-full flex-col items-center justify-center gap-8 md:h-screen md:flex-row md:items-start md:justify-around md:gap-1">
@@ -37,7 +37,7 @@ async function OurStory() {
           <div className="flex w-4/6 md:w-4/6">
             <Image
               alt={firstImage?.image?.alternativeText}
-              src={`${baseURL}${firstImage?.image?.url}`}
+              src={`${firstImage?.image?.url}`}
               height={250}
               width={250}
               className="w-full object-cover"
@@ -49,7 +49,7 @@ async function OurStory() {
           <div className="flex w-4/6 md:w-4/6">
             <Image
               alt={secondImage?.image?.alternativeText}
-              src={`${baseURL}${secondImage?.image?.url}`}
+              src={`${secondImage?.image?.url}`}
               height={250}
               width={250}
               className="w-full object-cover"

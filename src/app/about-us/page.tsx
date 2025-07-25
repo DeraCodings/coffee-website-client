@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { baseURL, fetchAboutPageData } from "@/functions/fetchHomePage";
+import { fetchAboutPageData } from "@/functions/fetchHomePage";
 import { aboutPageQuery } from "@/utils/data";
 import { fraunces, lato, playfairDisplay } from "@/utils/font-config";
 import { ApiResponse } from "@/utils/types";
@@ -17,13 +17,14 @@ export default async function AboutPage() {
     data?.AboutUs[15],
   ];
   console.log(data?.AboutUs);
+  console.log("Community Cards: ", communityCards);
   return (
     <div className="min-h-screen bg-white">
       {/* Header Section */}
       <div
         className="flex h-screen items-center justify-center"
         style={{
-          backgroundImage: `url(${baseURL}${data?.AboutUs[2]?.image?.url})`,
+          backgroundImage: `url(${data?.AboutUs[2]?.image?.url})`,
         }}
       >
         <div className="flex flex-col items-center justify-center px-4 py-24 text-center text-white md:py-32">
@@ -51,7 +52,7 @@ export default async function AboutPage() {
             </div>
             <div className="flex h-full items-center justify-center rounded-xl md:h-auto">
               <Image
-                src={`${baseURL}${data?.AboutUs[5]?.image?.url}`}
+                src={`${data?.AboutUs[5]?.image?.url}`}
                 alt={`${data?.AboutUs[5]?.image?.alternativeText}`}
                 width={1000}
                 height={1000}
@@ -108,7 +109,7 @@ export default async function AboutPage() {
                 key={index}
               >
                 <Image
-                  src={`${baseURL}${communityCard?.card_image?.url}`}
+                  src={`${communityCard?.card_image?.url}`}
                   alt={communityCard?.card_image?.alternativeText || ""}
                   width={600}
                   height={600}
