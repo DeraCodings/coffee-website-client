@@ -10,7 +10,6 @@ interface FeaturedProductCardProps {
   name: string;
   price: number;
   altText: string;
-  description: string | null;
   product: ProductShape;
 }
 
@@ -19,7 +18,6 @@ function FeaturedProductCard({
   name,
   price,
   altText,
-  description,
   product,
 }: FeaturedProductCardProps) {
   const { addToCart } = useCart();
@@ -35,7 +33,7 @@ function FeaturedProductCard({
         />
       </div>
       <h3 className={`text-wrap font-semibold ${lato.className}`}>{name}</h3>
-      <h3>{description ? `$${price}/12oz` : `$${price}`}</h3>
+      <h3>{product?.category?.name === "Coffee beans" ? `₦${price}/kg` : `₦${price}`}</h3>
       <button
         onClick={() => addToCart(product)}
         className={`inline-block rounded-sm bg-[#bf935f] px-4 py-2 font-semibold transition-colors hover:bg-[#443227] hover:text-white md:px-7 md:py-3 ${fraunces.className} text-sm md:text-base`}

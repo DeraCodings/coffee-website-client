@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { baseURL } from "@/functions/fetchHomePage";
 import AddToCartButton from "./AddtoCart";
 import { ProductShape } from "@/utils/types";
 
@@ -17,7 +16,7 @@ export default function CartProductCard({ product }: CartProductCardProps) {
       <div className="space-y-4">
         <div className="relative aspect-square overflow-hidden rounded-lg bg-white">
           <Image
-            src={`${baseURL}${product?.images[0]?.url}`}
+            src={`${product?.images[0]?.url}`}
             alt={`${product?.images[0]?.alternativeText}`}
             fill
             className="object-cover"
@@ -35,11 +34,11 @@ export default function CartProductCard({ product }: CartProductCardProps) {
 
         <div className="flex items-center space-x-4">
           <span className="text-3xl font-bold text-amber-900">
-            ${product?.price}
+            ₦{product?.price}
           </span>
           {product?.price && (
             <span className="text-xl text-gray-500 line-through">
-              ${product?.price}
+              ₦{product?.price}
             </span>
           )}
           <Badge variant="secondary" className="bg-green-100 text-green-800">

@@ -35,7 +35,6 @@ async function FeaturedSection() {
               altText={image?.alternativeText}
               name={product?.name}
               image={imageUrl}
-              description={product?.description}
               price={product?.price}
               key={product?.name}
               product={product}

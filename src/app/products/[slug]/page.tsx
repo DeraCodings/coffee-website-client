@@ -193,7 +193,7 @@ export default async function ProductDetailPage({
                     </h3>
                     <div className="flex items-center justify-between">
                       <span className="text-lg font-bold text-amber-900">
-                        ${product.price}
+                        ₦{product.price}
                       </span>
                     </div>
                   </div>

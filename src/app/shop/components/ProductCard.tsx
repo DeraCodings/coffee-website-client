@@ -5,6 +5,7 @@ import { useCart } from "@/context/cart-context";
 import { ProductShape } from "@/utils/types";
 import { toast } from "react-toastify";
 import { fraunces, lato } from "@/utils/font-config";
+import Link from "next/link";
 
 export default function ProductCard({ product }: { product: ProductShape }) {
   const { addToCart } = useCart();
@@ -34,9 +35,11 @@ export default function ProductCard({ product }: { product: ProductShape }) {
       </div>
 
       <div className="px-3 py-6 text-center">
-        <h3 className={`${fraunces.className} mb-1 text-lg font-semibold text-[#443227]`}>
-          {product.name}
-        </h3>
+        <Link href={`/products/${product.name}`} className="hover:underline">
+          <h3 className={`${fraunces.className} mb-1 text-lg font-semibold text-[#443227]`}>
+            {product.name}
+          </h3>
+        </Link>
         <p className={`${lato.className} mb-2 min-h-[40px] text-sm text-[#443227]/70`}>
           {product.description || "No description available"}
         </p>
