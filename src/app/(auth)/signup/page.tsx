@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
 // import { userSchema } from "@/actions/auth-actions";
-import { FaGoogle } from "react-icons/fa6";
+// import { FaGoogle } from "react-icons/fa6";
 import { account } from "@/utils/appwrite";
-import { ID, OAuthProvider } from "appwrite";
+import { ID } from "appwrite";
 import { z } from "zod";
 import { cn } from "@/lib/utils";
 import { fraunces, lato, playfairDisplay } from "@/utils/font-config";
@@ -86,29 +86,29 @@ export default function SignUpPage() {
     }
   }
 
-  async function handleSignUpWithProvider(provider: "Google" | "Facebook") {
-    try {
-      setIsLoading(true);
-      await account.createOAuth2Session(
-        OAuthProvider[provider],
-        "http://localhost:3000/",
-        "http://localhost:3000/fail",
-      );
-      const newUser = await account.get();
-      setUser(newUser);
-      console.log("User signed up with provider:", newUser);
-      router.push("/");
-    } catch (error) {
-      console.error("Error signing up with provider:", error);
-      setErrors({
-        email: "Failed to create account. Please try again.",
-        password: "",
-        fullName: "",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }
+  // async function handleSignUpWithProvider(provider: "Google" | "Facebook") {
+  //   try {
+  //     setIsLoading(true);
+  //     await account.createOAuth2Session(
+  //       OAuthProvider[provider],
+  //       "http://localhost:3000/",
+  //       "http://localhost:3000/fail",
+  //     );
+  //     const newUser = await account.get();
+  //     setUser(newUser);
+  //     console.log("User signed up with provider:", newUser);
+  //     router.push("/");
+  //   } catch (error) {
+  //     console.error("Error signing up with provider:", error);
+  //     setErrors({
+  //       email: "Failed to create account. Please try again.",
+  //       password: "",
+  //       fullName: "",
+  //     });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#fff] px-4 py-12 sm:px-6 lg:px-8">
@@ -192,7 +192,7 @@ export default function SignUpPage() {
         </form>
 
         <div className="mt-6">
-          <div className="relative">
+          {/* <div className="relative">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
@@ -201,10 +201,10 @@ export default function SignUpPage() {
                 Or continue with
               </span>
             </div>
-          </div>
+          </div> */}
 
           <div className="mt-6 grid grid-cols-2 gap-3">
-            <div>
+            {/* <div>
               <button
                 onClick={() => handleSignUpWithProvider("Google")}
                 disabled={isLoading}
@@ -219,7 +219,7 @@ export default function SignUpPage() {
                 <span className="text-black">Sign up with Google</span>
                 <FaGoogle size={23} fill="red" />
               </button>
-            </div>
+            </div> */}
 
             {/* <div>
               <button

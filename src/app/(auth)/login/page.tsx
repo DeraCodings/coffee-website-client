@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/context/auth-context";
-import { FaGoogle } from "react-icons/fa6";
+// import { FaGoogle } from "react-icons/fa6";
 import { z } from "zod";
-import { account, OAuthProvider } from "@/utils/appwrite";
+import { account } from "@/utils/appwrite";
 import { cn } from "@/lib/utils";
 import { fraunces, lato, playfairDisplay } from "@/utils/font-config";
 
@@ -31,7 +31,11 @@ export default function SignInPage() {
     const checkAuth = async () => {
       try {
         const currentUser = await account.get();
-        if (currentUser && currentUser.email && !currentUser.labels?.includes('anonymous')) {
+        if (
+          currentUser &&
+          currentUser.email &&
+          !currentUser.labels?.includes("anonymous")
+        ) {
           const redirectTo = searchParams.get("redirect") || "/";
           router.replace(redirectTo);
         }
@@ -93,86 +97,63 @@ export default function SignInPage() {
   // }
 
   async function handleSignIn(e: React.FormEvent<HTMLFormElement>) {
-  e.preventDefault();
-  setIsLoading(true);
-  
-  try {
-    const formData = new FormData(e.currentTarget);
-    const rawFormData = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
-    
-    const validatedFields = userSchema.safeParse(rawFormData);
-    if (!validatedFields.success) {
-      const fieldErrors = validatedFields.error.flatten().fieldErrors;
-      setErrors({
-        email: fieldErrors.email ? fieldErrors.email[0] : "",
-        password: fieldErrors.password ? fieldErrors.password[0] : "",
-      });
-      return;
-    }
+    e.preventDefault();
+    setIsLoading(true);
 
-    const { email, password } = validatedFields.data;
-
-    // delete any existing sessions
-    await account.deleteSessions();
-
-    // Create session
-    await account.createEmailPasswordSession(email, password);
-    const newUser = await account.get();
-    console.log("User signed in:", newUser);
-    setUser(newUser);
-
-    // Clear any existing errors
-    setErrors({ email: "", password: "" });
-
-    // Redirect to intended page
-    const redirectParam = searchParams.get("redirect");
-    router.push(`/auth-check?redirect=${encodeURIComponent(redirectParam || "/")}`);
-    
-  } catch (error) {
-    console.error("Error signing in:", error);
-    let errorMessage = "Failed to sign in. Please try again.";
-    
-    if (error instanceof Error) {
-      // Handle specific Appwrite errors
-      if (error.message.includes("Invalid credentials")) {
-        errorMessage = "Invalid email or password. Please try again.";
-      } else if (error.message.includes("user_not_found")) {
-        errorMessage = "No account found with this email. Please sign up first.";
-      } else {
-        errorMessage = error.message;
-      }
-    }
-    
-    setErrors({
-      email: errorMessage,
-      password: "",
-    });
-  } finally {
-    setIsLoading(false);
-  }
-}
-
-  async function handleSignInWithProvider() {
     try {
-      setIsLoading(true);
-      await account.createOAuth2Session(
-        OAuthProvider.Google,
-        "https://terraandbrews.vercel.app/",
-        "https://terraandbrews.vercel.app/fail",
-      );
+      const formData = new FormData(e.currentTarget);
+      const rawFormData = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
+
+      const validatedFields = userSchema.safeParse(rawFormData);
+      if (!validatedFields.success) {
+        const fieldErrors = validatedFields.error.flatten().fieldErrors;
+        setErrors({
+          email: fieldErrors.email ? fieldErrors.email[0] : "",
+          password: fieldErrors.password ? fieldErrors.password[0] : "",
+        });
+        return;
+      }
+
+      const { email, password } = validatedFields.data;
+
+      // delete any existing sessions
+      await account.deleteSessions();
+
+      // Create session
+      await account.createEmailPasswordSession(email, password);
       const newUser = await account.get();
+      console.log("User signed in:", newUser);
       setUser(newUser);
-      console.log("User signed up with provider:", newUser);
-      // router.push("/");
+
+      // Clear any existing errors
+      setErrors({ email: "", password: "" });
+
+      // Redirect to intended page
       const redirectParam = searchParams.get("redirect");
-      router.push(redirectParam || "/");
+      router.push(
+        `/auth-check?redirect=${encodeURIComponent(redirectParam || "/")}`,
+      );
     } catch (error) {
-      console.error("Error signing up with provider:", error);
+      console.error("Error signing in:", error);
+      let errorMessage = "Failed to sign in. Please try again.";
+
+      if (error instanceof Error) {
+        // Handle specific Appwrite errors
+        if (error.message.includes("Invalid credentials")) {
+          errorMessage = "Invalid email or password. Please try again.";
+        } else if (error.message.includes("user_not_found")) {
+          errorMessage =
+            "No account found with this email. Please sign up first.";
+        } else {
+          errorMessage = error.message;
+        }
+      }
+
       setErrors({
-        email: "Failed to create account. Please try again.",
+        email: errorMessage,
         password: "",
       });
     } finally {
@@ -180,11 +161,38 @@ export default function SignInPage() {
     }
   }
 
+  // async function handleSignInWithProvider() {
+  //   try {
+  //     setIsLoading(true);
+  //     await account.createOAuth2Session(
+  //       OAuthProvider.Google,
+  //       "https://terraandbrews.vercel.app/",
+  //       "https://terraandbrews.vercel.app/fail",
+  //     );
+  //     const newUser = await account.get();
+  //     setUser(newUser);
+  //     console.log("User signed up with provider:", newUser);
+  //     // router.push("/");
+  //     const redirectParam = searchParams.get("redirect");
+  //     router.push(redirectParam || "/");
+  //   } catch (error) {
+  //     console.error("Error signing up with provider:", error);
+  //     setErrors({
+  //       email: "Failed to create account. Please try again.",
+  //       password: "",
+  //     });
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-[#fff] px-4 py-12 sm:px-6 lg:px-8">
       <div className="w-full max-w-md space-y-8">
         <div>
-          <h2 className={`mt-6 text-center text-3xl font-extrabold text-[#443227] ${playfairDisplay.className}`}>
+          <h2
+            className={`mt-6 text-center text-3xl font-extrabold text-[#443227] ${playfairDisplay.className}`}
+          >
             Sign in to your account
           </h2>
         </div>
@@ -205,7 +213,9 @@ export default function SignInPage() {
               placeholder="name@flowbite.com"
               required
             />
-            {errors?.email && <p className={`text-red-500 ${lato.className}`}>{errors.email}</p>}
+            {errors?.email && (
+              <p className={`text-red-500 ${lato.className}`}>{errors.email}</p>
+            )}
           </div>
           <div className="mb-5">
             <label
@@ -222,7 +232,9 @@ export default function SignInPage() {
               required
             />
             {errors?.password && (
-              <p className={`text-red-500 ${lato.className}`}>{errors.password}</p>
+              <p className={`text-red-500 ${lato.className}`}>
+                {errors.password}
+              </p>
             )}
           </div>
           <button
@@ -233,7 +245,7 @@ export default function SignInPage() {
               isLoading
                 ? "cursor-not-allowed bg-[#c8aa8d] opacity-50"
                 : "cursor-pointer bg-[#9d7546] hover:bg-[#bf935f] focus:ring-[#bf935f]",
-              fraunces.className
+              fraunces.className,
             )}
           >
             {isLoading ? "Loading..." : "Sign in"}
@@ -241,7 +253,7 @@ export default function SignInPage() {
         </form>
 
         <div className="mt-6">
-          <div className="">
+          {/* <div className="">
             <div className="inset-0 flex items-center">
               <div className="w-full border-t border-gray-300"></div>
             </div>
@@ -250,10 +262,10 @@ export default function SignInPage() {
                 Or continue with
               </span>
             </div>
-          </div>
+          </div> */}
 
-          <div className="mt-6 flex justify-center items-center">
-            <div>
+          <div className="mt-6 flex items-center justify-center">
+            {/* <div>
               <button
                 onClick={handleSignInWithProvider}
                 disabled={isLoading}
@@ -264,10 +276,12 @@ export default function SignInPage() {
                     : "cursor-pointer hover:bg-gray-50",
                 )}
               >
-                <span className={`text-black ${lato.className} pr-4`}>Sign in with Google</span>
+                <span className={`text-black ${lato.className} pr-4`}>
+                  Sign in with Google
+                </span>
                 <FaGoogle size={23} fill="red" />
               </button>
-            </div>
+            </div> */}
 
             {/* <div>
               <button
