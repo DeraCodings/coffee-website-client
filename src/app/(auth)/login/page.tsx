@@ -155,13 +155,13 @@ export default function SignInPage() {
   }
 }
 
-  async function handleSignInWithProvider(provider: "Google" | "Facebook") {
+  async function handleSignInWithProvider() {
     try {
       setIsLoading(true);
       await account.createOAuth2Session(
-        OAuthProvider[provider],
-        "http://localhost:3000/",
-        "http://localhost:3000/fail",
+        OAuthProvider.Google,
+        "https://terraandbrews.vercel.app/",
+        "https://terraandbrews.vercel.app/fail",
       );
       const newUser = await account.get();
       setUser(newUser);
@@ -255,7 +255,7 @@ export default function SignInPage() {
           <div className="mt-6 flex justify-center items-center">
             <div>
               <button
-                onClick={() => handleSignInWithProvider("Google")}
+                onClick={handleSignInWithProvider}
                 disabled={isLoading}
                 className={cn(
                   "flex w-full items-center justify-between rounded-md border border-gray-500 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm",
